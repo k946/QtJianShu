@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/icon">
+        <file>C:/Users/user/Desktop/fontawesome-free-5.13.0-web/webfonts/fa-solid-900.ttf</file>
+    </qresource>
+</RCC>
