@@ -817,6 +817,12 @@ void Decode::sltDecodeSearchNote(std::shared_ptr<QByteArray> content)
 //主页热门文章
 void Decode::sltDecodeHomePage(std::shared_ptr<QByteArray> content)
 {
+
+    QFile file("C:\\Users\\user\\Desktop\\简书.txt");
+    file.open(QIODevice::WriteOnly);
+    file.write(content->data());
+    file.close();
+
     std::vector< std::map<QString, QString> > result;   //结果
     std::map<QString, QString> m;
     htmlcxx::HTML::ParserDom parser;
@@ -832,40 +838,12 @@ void Decode::sltDecodeHomePage(std::shared_ptr<QByteArray> content)
 
              if(it->attribute("data-note-id").second.compare("") == 0)
                  continue;      //如果li标签的data-note-id属性不存在，则继续匹配下一个li标签
+
              m["id"] = it->attribute("data-note-id").second.data();
+
              int li_end = it->offset() + it->length();
 
-             it += 4;
-             if( it->tagName().compare("img") == 0 ){ //匹配图片
-                  it->parseAttributes();
-                  m["image"] = it->attribute("src").second.data();
-             }else{
-                it -= 4;
-             }
-
-             for(;it != end; ++it){
-                 if( it->tagName().compare("a") == 0 ){//匹配li里的a标签:url与标题
-                      it->parseAttributes();
-                      if(it->attribute("class").second.compare("title") != 0)
-                           continue;    //如果不包含class不为title，则执行
-                      m["link"] = ("http://www.jianshu.com" + it->attribute("href").second).data();
-                      m["title"] = (++it)->text().data();
-                      break;
-                 }
-             }
-
-             for(;it != end; ++it){
-                 if( it->tagName().compare("p") == 0 ){//匹配li里的p标签：大致的内容
-                      it->parseAttributes();
-                      if(it->attribute("class").second.compare("abstract") != 0)
-                           continue;
-                      m["content"] = (++it)->text().data();
-                      break;
-                 }
-             }
-
              for(; it != end; ++it){
-
                  /*li标签结束，表示当前文章解析完成，退出循环解析下一篇*/
                  if( it->offset() >= li_end ){
                      result.push_back(m);
@@ -874,35 +852,52 @@ void Decode::sltDecodeHomePage(std::shared_ptr<QByteArray> content)
                      break;
                  }
 
-                 it->parseAttributes();
-                 QString classValue = it->attribute("class").second.data();
-
-                 if(classValue == "iconfont ic-paid1"){
-                     m["diamons"] = (++it)->text().data();
-                 }
-                 else if(classValue == "nickname"){
+                 if(it->isTag()){
                      it->parseAttributes();
-                     m["userHomePage"] = ("http://www.jianshu.com" + it->attribute("href").second).data();
-                     m["nickname"] = (++it)->text().data();
+                     QString classValue = it->attribute("class").second.data();
 
-                 }
-                 else if(classValue == "iconfont ic-list-comments"){
-                     m["comments"] = (++it)->text().data();
-                 }
-                 else if(classValue == "iconfont ic-list-like"){
-                     m["likes"] = (++it)->text().data();
-                 }else if(classValue == "iconfont ic-list-money"){
-                     m["money"] = (++it)->text().data();
-                 }else if( classValue == "iconfont ic-paid" ){
-                     QString paid = (++it)->text().data();
-                     paid.replace(" ", "");
-                     paid.replace("\n","");
-                     m["paid"] = paid;
+
+                     /*class属性不存在，target属性的值为_blank，表示匹配到用户主页*/
+                     if( "iconfont ic-paid1" == classValue ){
+                       QString t = m["diamonds"] = (++it)->text().data();
+                       t.replace("\n", "");
+                       t.replace(" ", "");
+                       m["diamonds"] = t;
+                     }
+                     else if("abstract" == classValue ){
+                         m["content"] = (++it)->text().data();
+                     }
+                     else if("img-blur" == classValue ){
+                         m["image"] = it->attribute("src").second.data();
+                     }
+                     else if("title" == classValue ){
+                         m["link"] = ("http://www.jianshu.com" + it->attribute("href").second).data();
+                         m["title"] = (++it)->text().data();
+                     }
+                     else if("nickname" == classValue ){
+                         m["userHomePage"] = ("http://www.jianshu.com" + it->attribute("href").second).data();
+                         m["nickname"] = (++it)->text().data();
+                     }
+                     else if("iconfont ic-list-comments" == classValue ){
+                         m["comments"] = (++it)->text().data();
+                     }
+                     else if("iconfont ic-list-like" == classValue ){
+                         m["likes"] = (++it)->text().data();
+                     }
+                     else if("iconfont ic-list-money" == classValue){
+                         m["money"] = (++it)->text().data();
+                     }else if("iconfont ic-paid" == classValue){
+                         QString paid = (++it)->text().data();
+                         paid.replace(" ", "");
+                         paid.replace("\n","");
+                         m["paid"] = paid;
+                     }
                  }
 
              }
         }
     }
+
 
     emit sigSendResult(result);
 }

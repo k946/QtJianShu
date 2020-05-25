@@ -39,7 +39,7 @@ void ArticleItem::update(std::map<QString, QString> &data)
     * clicks : 文章点击量
     * money : 被打赏量
     * time : 文章发布时间
-    * diamons : 钻石
+    * diamonds : 钻石
     * image : 展示图片的url
     * paid : 付费文章
     */
@@ -115,7 +115,7 @@ void ArticleItem::update(std::map<QString, QString> &data)
             /**/
             GLOBAL::setIcon(QChar(0xf3a5),diamonds, "red", 8);
             diamonds->setFixedWidth(120);
-            diamonds->setIndent(20);
+            diamonds->setIndent(24);
             diamonds->setAlignment(Qt::AlignLeft);
 
         }

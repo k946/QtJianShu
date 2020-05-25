@@ -42,7 +42,7 @@ void HttpRequest::sltProcessFinished()
 //一般用于请求图片
 void HttpRequest::sltHttpRequest(const QString &url)
 {
-    qDebug() << this->thread()->currentThreadId() <<"   HttpRequest: " << url ;
+    //qDebug() << this->thread()->currentThreadId() <<"   HttpRequest: " << url ;
     QNetworkRequest req;        //http请求
     QSslConfiguration config;   //SSL，用于进行HTTPS请求
 
