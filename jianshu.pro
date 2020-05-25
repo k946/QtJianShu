@@ -43,7 +43,7 @@ SOURCES += \
     htmlcxx/html/ParserSax.cc \
     htmlcxx/html/Uri.cc \
     htmlcxx/html/utils.cc \
-    ../../day0/Image/myimage.cpp \
+    myimage.cpp \
     books/widget_books.cpp \
     books/workerofbooks.cpp \
     global.cpp \
@@ -93,7 +93,7 @@ HEADERS += \
     htmlcxx/html/Uri.h \
     htmlcxx/html/utils.h \
     htmlcxx/html/wincstring.h \
-    ../../day0/Image/myimage.h \
+    myimage.h \
     books/widget_books.h \
     books/workerofbooks.h \
     global.h \

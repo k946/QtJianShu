@@ -7,7 +7,7 @@
 #include <QScrollArea>
 #include <QVBoxLayout>
 #include "workerofarticle.h"
-#include "../../../day0/Image/myimage.h"
+#include "myimage.h"
 
 class Widget_Article : public QWidget
 {

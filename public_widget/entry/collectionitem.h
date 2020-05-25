@@ -4,7 +4,7 @@
 #include <QWidget>
 #include <QLabel>
 #include "widget_entry.h"
-#include "../../../day0/Image/myimage.h"
+#include "myimage.h"
 
 class CollectionItem : public Widget_Entry
 {

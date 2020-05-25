@@ -11,6 +11,11 @@
 #include "workerofauthorinfo.h"
 #include "public_widget/article/widget_article.h"
 
+
+/*
+** 用于显示作者信息（文章列表，粉丝数等）
+*/
+
 class Widget_AuthorInfo : public QWidget
 {
     Q_OBJECT

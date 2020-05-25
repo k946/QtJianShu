@@ -4,7 +4,7 @@
 #include "widget_entry.h"
 #include "labelmouseevent.h"
 #include <QLabel>
-#include "../../../day0/Image/myimage.h"
+#include "myimage.h"
 
 class AuthorItem : public Widget_Entry
 {

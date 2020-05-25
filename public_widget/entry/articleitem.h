@@ -5,7 +5,7 @@
 #include "widget_entry.h"
 #include <QThread>
 #include "labelmouseevent.h"
-#include "../../../day0/Image/myimage.h"
+#include "myimage.h"
 #include <QHBoxLayout>
 
 namespace Ui {

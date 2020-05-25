@@ -5,7 +5,7 @@
 #include "labelmouseevent.h"
 #include <QLabel>
 #include <QGraphicsDropShadowEffect>
-#include "../../../day0/Image/myimage.h"
+#include "myimage.h"
 
 class RecommendationsAuthorItem : public Widget_Entry
 {

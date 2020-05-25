@@ -3,7 +3,7 @@
 
 #include "widget_entry.h"
 #include "labelmouseevent.h"
-#include "../../../day0/Image/myimage.h"
+#include "myimage.h"
 
 class Widget_EntryBooks : public Widget_Entry
 {
