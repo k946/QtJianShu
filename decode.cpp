@@ -257,7 +257,7 @@ void Decode::sltDecodeAuthorInfo(std::shared_ptr<QByteArray> content)
             * clicks : 文章点击量
             * money : 被打赏量
             * time : 文章发布时间
-            * diamons : 钻石
+            * diamonds : 钻石
             * image : 展示图片的url
             */
 
@@ -301,7 +301,7 @@ void Decode::sltDecodeAuthorInfo(std::shared_ptr<QByteArray> content)
                         it += 6;
                         it->parseAttributes();
                         if(it->attribute("class").second.compare("iconfont ic-paid1") == 0){
-                            m["diamons"] = (++it)->text().data();
+                            m["diamonds"] = (++it)->text().data();
                             it -= 2;
                         }else{
                             it -= 6;
@@ -576,7 +576,7 @@ void Decode::sltDecodeShcool(std::shared_ptr<QByteArray> content)
         * clicks : 文章点击量
         * money : 被打赏量
         * time : 文章发布时间
-        * diamons : 钻石
+        * diamonds : 钻石
         * image : 展示图片的url
         * paid : 付费文章
         */
@@ -630,7 +630,7 @@ void Decode::sltDecodeShcool(std::shared_ptr<QByteArray> content)
                         QString classValue = it->attribute("class").second.data();
 
                         if(classValue == "iconfont ic-paid1"){
-                            m["diamons"] = (++it)->text().data();
+                            m["diamonds"] = (++it)->text().data();
                         }
                         else if(classValue == "nickname"){
                             it->parseAttributes();
